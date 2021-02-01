@@ -5,6 +5,8 @@ class TodolistsController < ApplicationController
 
   def create
     list = List.new(list_params)
+    # APIに引数で投稿の本文を渡し、戻り値を元にスコアを作成
+    list.score = Language.get_data(list_params[:body])
     list.save
     # APIに引数で投稿画像のデータを渡し、戻り値を元にタグを作成
     tags = Vision.get_image_data(list.image)
