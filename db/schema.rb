@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_01_083533) do
+ActiveRecord::Schema.define(version: 2021_02_03_110949) do
+
+  create_table "image_albums", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "lists", force: :cascade do |t|
     t.string "title"
@@ -19,6 +25,14 @@ ActiveRecord::Schema.define(version: 2021_02_01_083533) do
     t.datetime "updated_at", null: false
     t.string "image_id"
     t.decimal "score", precision: 5, scale: 3
+  end
+
+  create_table "post_images", force: :cascade do |t|
+    t.integer "image_album_id", null: false
+    t.string "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["image_album_id"], name: "index_post_images_on_image_album_id"
   end
 
   create_table "tags", force: :cascade do |t|
