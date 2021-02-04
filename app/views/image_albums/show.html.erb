@@ -3,6 +3,9 @@
     <%= link_to post_image_path(image) do %>
       <%= attachment_image_tag image, :image, class: "default_image", size:"400x400" %>
     <% end %>
+    <% image.tags.each do |tag| %>
+        <span class="label"><%= tag.name %></span>
+      <% end %>
   <% end %>
 <% else %>
   画像はありません。
