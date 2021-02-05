@@ -7,7 +7,9 @@ class ImageAlbumsController < ApplicationController
   def create
     @album = ImageAlbum.new(album_params)
     @album.save
+    # @albumに紐づいたpost_imagesをそれぞれ個別にAPIに渡す
     @album.post_images.each do |post_image|
+      # 引数にpost_imageのimage_idカラムの値を渡す
       tags = Vision.get_image_data(post_image.image_id)
       tags.each do |tag|
         post_image.tags.create(name: tag)
